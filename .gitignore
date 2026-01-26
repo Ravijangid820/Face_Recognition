@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+env/
+venv/
+.venv/
+env.bak/
+
+# Conda
+/.conda/
+*.conda
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+*.egg-info/
+
+# IDEs
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Secrets
+*.env
+.env
+
+# macOS
+.DS_Store

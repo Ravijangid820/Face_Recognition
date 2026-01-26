@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.nav-left {
+  width: 20%;
+}
+
+/* .dashboard-section {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+} */
+
+/* .container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+} */
+
+.left-side {
+  max-width: 300px;
+  background: #101214;
+  color: white;
+  height: 90vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  flex-shrink: 0; 
+  overflow-y: hidden;
+} 
+
+.left-side .logo-img {
+  width: 80%;
+  height: 13%;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.left-side .menu-item {
+  margin: 15px 14px;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 30px;
+  cursor: pointer;
+}
+
+.left-side .menu-item-group {
+  margin-top: auto;
+  text-align: center;
+}
+
+.left-side .menu-item1 {
+  margin: 15px 14px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+/* .right-side {
+  flex-grow: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 40px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+
+/* Ensure DataGrid takes full width of right side */
+.right-side .MuiDataGrid-root {
+  width: 100%;
+  background-color: white;
+}
+
+.right-side .greeting {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.right-side .welcome-message {
+  font-size: 50px;
+}
+
+.menu-item:hover {
+  text-decoration: underline;
+}
+
+.hii-png {
+  width: 35px;
+  height: 35px;
+}
+
+/* Add support for smaller screens */
+@media screen and (max-width: 1024px) {
+  .left-side {
+    min-width: 200px;
+  }
+}
+.dashboard-section {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.left-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: #101214;
+  z-index: 100;
+}
+
+.main-content {
+  flex: 1;
+  min-height: 100vh;
+  padding: 20px;
+  margin-left: 300px; /* Match left-sidebar width */
+  width: calc(100% - 250px); /* Ensure main content takes remaining width */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.welcome-message {
+  font-size: 50px;
+}
+

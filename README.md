@@ -1,55 +1,64 @@
-# Face Recognition System with MySQL Integration
+# Face Recognition with MySQL Registration
 
-## Overview
+Real-time face recognition (OpenCV + `face_recognition`) with MySQL-backed registration.
+Register a face once (name + registration number), then recognize it live from webcam.
 
-This is a Face Recognition System that captures, registers, and recognizes faces using OpenCV, face_recognition, and MySQL for storing face encodings. It allows user identification based on face recognition and displays the name and registration number of recognized users in a real-time video feed.
+> **Note:** `face_encodings.json` is gitignored — encodings are biometric data. Use MySQL as the source of truth.
 
 ## Features
+- 🔍 Face detection & recognition (`hog` for live, `cnn` option for enrollment)
+- 🗄️ MySQL storage of face encodings (pickle BLOB), dedup check before insert
+- 🪟 Live overlay: name + registration number on video feed
+- 🐳 Dockerfile for reproducible setup
 
-Face Detection & Recognition using face_recognition
+## Project structure
+```
+.
+├── face_recognition.py      # main app (renamed from final.py): register + recognize loop
+├── face_recognition_model.py# encoding helpers
+├── model.py                 # model utilities
+├── examples/
+│   ├── save_face.py         # minimal enrollment example
+│   ├── verify_face.py       # minimal verification example
+│   └── iterations/          # earlier experiments (json/mysql/regNo variants)
+├── environment.yml          # conda env
+├── requirements.txt         # pip install
+├── Dockerfile
+└── README.md
+```
 
-Stores face encodings in MySQL for scalability
+## Requirements
+- Python 3.10+
+- MySQL 8.x running locally
+- Webcam
 
-Automatically checks for duplicates before registering a new user
+## Setup
+```bash
+# conda
+conda env create -f environment.yml
+conda activate face-recognition
 
-Uses OpenCV to process real-time video feed
+# or pip
+pip install -r requirements.txt
+```
 
-Requirements
-
-## Install Dependencies
-
-### I have Provided the conda environment text file.
-
-Ensure you have Python 3.x installed, then run:
-
-pip install opencv-python face-recognition mysql-connector-python numpy
-
-MySQL Setup
-
-Install MySQL and start the server.
-
-## Create the database:
-
+```sql
 CREATE DATABASE face_recognition_db;
+```
 
-Update the DB_CONFIG in face_recognition.py with your MySQL credentials.
+Edit `DB_CONFIG` in `face_recognition.py` with your MySQL user/password
+(or export `MYSQL_HOST/MYSQL_USER/MYSQL_PASSWORD/MYSQL_DB` if you wire env support).
 
-# How to Run
-
-Start MySQL Server
-
-## Run the script
-
+## Run
+```bash
 python face_recognition.py
+# press 'q' to quit the video window
+```
 
-The system will recognize known faces and display their name & registration number.
-
-## Exiting the Program
-
-Press 'q' to exit the video window.
+## How it works
+1. `connect_db()` ensures `users(reg_number UNIQUE, name, face_encoding BLOB)`.
+2. Enrollment captures 5 frames → encodings → `is_duplicate_face()` (tolerance 0.35) → insert if new.
+3. Recognition loop matches live encodings against DB and draws name + reg. number.
 
 ## License
-
-This project is open-source and free to use.
-
-Contributors welcome! Feel free to submit pull requests.
+Open source — contributions welcome via pull requests.

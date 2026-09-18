@@ -3,7 +3,7 @@
 Real-time face recognition (OpenCV + `face_recognition`) with MySQL-backed registration.
 Register a face once (name + registration number), then recognize it live from webcam.
 
-> **Note:** `face_encodings.json` is gitignored — encodings are biometric data. Use MySQL as the source of truth.
+> **Note:** Face encodings are biometric data. This repo stores them in MySQL only — no `face_encodings.json` is committed.
 
 ## Features
 - 🔍 Face detection & recognition (`hog` for live, `cnn` option for enrollment)
@@ -18,12 +18,12 @@ Register a face once (name + registration number), then recognize it live from w
 ├── face_recognition_model.py# encoding helpers
 ├── model.py                 # model utilities
 ├── examples/
-│   ├── save_face.py         # minimal enrollment example
-│   ├── verify_face.py       # minimal verification example
 │   └── iterations/          # earlier experiments (json/mysql/regNo variants)
+├── main/
+│   ├── save_face.py         # minimal enrollment example
+│   └── verify_face.py       # minimal verification example
 ├── environment.yml          # conda env
-├── requirements.txt         # pip install
-├── Dockerfile
+├── dockerfile
 └── README.md
 ```
 
@@ -34,12 +34,8 @@ Register a face once (name + registration number), then recognize it live from w
 
 ## Setup
 ```bash
-# conda
 conda env create -f environment.yml
-conda activate face-recognition
-
-# or pip
-pip install -r requirements.txt
+conda activate face
 ```
 
 ```sql
